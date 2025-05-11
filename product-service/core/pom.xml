@@ -21,7 +21,13 @@
             <groupId>com.mysite</groupId>
             <artifactId>model</artifactId>
             <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
+            <version>5.17.0</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
-
 </project>
