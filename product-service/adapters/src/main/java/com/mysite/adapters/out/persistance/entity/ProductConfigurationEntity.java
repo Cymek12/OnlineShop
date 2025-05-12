@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
 
 import java.math.BigDecimal;
 
@@ -21,9 +22,7 @@ public class ProductConfigurationEntity {
     private String name;
     private String value;
     private BigDecimal additionalPrice;
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "product_id")
     private ProductEntity product;
-
-
 }

@@ -1,6 +1,5 @@
 package com.mysite.adapters.in.web;
 
-import com.mysite.adapters.in.web.mapper.ProductConfigurationMapper;
 import com.mysite.adapters.in.web.mapper.ProductMapper;
 import com.mysite.core.port.in.ProductUseCase;
 import com.mysite.model.*;
@@ -19,7 +18,6 @@ import java.util.List;
 public class ProductController {
     private final ProductUseCase productUseCase;
     private final ProductMapper productMapper;
-    private final ProductConfigurationMapper productConfigurationMapper;
 
     @PostMapping
     public ProductDTO addProduct(@RequestBody ProductCommand productCommand) {
@@ -36,7 +34,7 @@ public class ProductController {
     public PageContent<ProductDTO> getAllProducts(Pageable pageable, @RequestParam(required = false) String productType) {
         MyPageable myPageable = new MyPageable(pageable.getPageSize(), pageable.getPageNumber());
         PageContent<Product> productPageContent = productUseCase.getAllProducts(myPageable, productType);
-        List<ProductDTO> list = productMapper.toDtoListProducts(productPageContent.getContent());
+        List<ProductDTO> list = productPageContent.getContent().stream().map(productMapper::toDto).toList();
         return new PageContent<>(productPageContent.getTotalElements(),
                 productPageContent.getCurrentPage(),
                 productPageContent.getTotalPageNumber(),
@@ -60,6 +58,6 @@ public class ProductController {
         List<ProductConfiguration> configurations = productUseCase
                 .getProductById(Long.valueOf(id))
                 .getConfigurations();
-        return configurations.stream().map(productConfigurationMapper::toDto).toList();
+        return configurations.stream().map(productMapper::toDto).toList();
     }
 }

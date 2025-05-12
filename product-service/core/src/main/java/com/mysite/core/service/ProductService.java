@@ -20,9 +20,9 @@ public class ProductService implements ProductUseCase {
             throw new ProductAlreadyExistsException("Product with name: " + product.getName() + " already exists");
         }
         validateProductData(product);
-        for (ProductConfiguration productConfiguration : product.getConfigurations()) {
-            productConfiguration.setProduct(product);
-        }
+
+
+
         return productPort.save(product);
     }
 

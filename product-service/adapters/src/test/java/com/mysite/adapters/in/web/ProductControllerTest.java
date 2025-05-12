@@ -1,9 +1,10 @@
 package com.mysite.adapters.in.web;
 
-import com.mysite.adapters.in.web.mapper.ProductConfigurationMapper;
-import com.mysite.adapters.in.web.mapper.ProductMapper;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mysite.core.port.in.ProductUseCase;
+import com.mysite.model.Product;
 import com.mysite.publicmodel.command.ProductCommand;
+import com.mysite.publicmodel.dto.ProductDTO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -13,7 +14,7 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static com.mysite.adapters.TestDataBuilder.buildProductCommand;
+import static com.mysite.adapters.TestDataBuilder.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -28,21 +29,19 @@ public class ProductControllerTest {
     @MockitoBean
     private ProductUseCase productUseCase;
     @Autowired
-    private ProductMapper productMapper;
-    @Autowired
-    private ProductConfigurationMapper productConfigurationMapper;
+    private ObjectMapper objectMapper;
     @Autowired
     private MockMvc mockMvc;
 
     @Test
     void addProduct_returnProductDTO() throws Exception {
         ProductCommand productCommand = buildProductCommand();
+        ProductDTO productDTO = buildProductDTO();
+        Product product = buildProduct();
 
-
-
-        when(doctorService.addDoctor(any())).thenReturn(doctorDTO);
+        when(productUseCase.addProduct(any())).thenReturn(product);
         mockMvc.perform(post("/doctors")
-                        .content(objectMapper.writeValueAsString(doctorCommand))
+                        .content(objectMapper.writeValueAsString(productCommand))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
