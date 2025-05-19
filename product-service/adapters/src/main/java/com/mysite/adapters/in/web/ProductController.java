@@ -31,7 +31,7 @@ public class ProductController {
     }
 
     @GetMapping
-    public PageContent<ProductDTO> getAllProducts(Pageable pageable, @RequestParam(required = false) String productType) {
+    public PageContent<ProductDTO> getAllProducts(Pageable pageable, @RequestParam(name = "productType", required = false) String productType) {
         MyPageable myPageable = new MyPageable(pageable.getPageSize(), pageable.getPageNumber());
         PageContent<Product> productPageContent = productUseCase.getAllProducts(myPageable, productType);
         List<ProductDTO> list = productPageContent.getContent().stream().map(productMapper::toDto).toList();

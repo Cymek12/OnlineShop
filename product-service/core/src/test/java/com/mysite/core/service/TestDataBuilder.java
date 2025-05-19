@@ -1,4 +1,4 @@
-package com.mysite.adapters;
+package com.mysite.core.service;
 
 import com.mysite.model.Product;
 import com.mysite.model.ProductConfiguration;
@@ -9,7 +9,6 @@ import com.mysite.publicmodel.dto.ProductConfigurationDTO;
 import com.mysite.publicmodel.dto.ProductDTO;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 public class TestDataBuilder {
