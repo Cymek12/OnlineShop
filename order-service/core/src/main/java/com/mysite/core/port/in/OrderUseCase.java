@@ -16,4 +16,6 @@ public interface OrderUseCase {
     void delete(Long id);
 
     PageContent<Order> getOrdersByUserId(MyPageable myPageable, Long userId);
+
+    byte[] generateInvoice();
 }

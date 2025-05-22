@@ -21,7 +21,7 @@ public class OrderController {
     private final OrderUseCase orderUseCase;
     private final OrderMapper orderMapper;
 
-    @PostMapping()
+    @PostMapping
     public OrderDTO createOrder(@RequestBody CreateOrderCommand request) {
         Order order = orderUseCase.createOrder(request);
         return orderMapper.toDto(order);
@@ -55,5 +55,10 @@ public class OrderController {
                 ordersPageContent.getCurrentPage(),
                 ordersPageContent.getTotalPageNumber(),
                 list);
+    }
+
+    @PostMapping("/invoice")
+    public byte[] generateInvoice() {
+        return orderUseCase.generateInvoice();
     }
 }

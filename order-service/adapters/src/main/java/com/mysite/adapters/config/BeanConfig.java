@@ -1,6 +1,7 @@
 package com.mysite.adapters.config;
 
 import com.mysite.core.port.in.OrderUseCase;
+import com.mysite.core.port.out.InvoiceGeneratorPort;
 import com.mysite.core.port.out.OrderPort;
 import com.mysite.core.service.OrderService;
 import org.springframework.context.annotation.Bean;
@@ -10,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 public class BeanConfig {
 
     @Bean
-    public OrderUseCase orderUseCase(OrderPort orderPort) {
-        return new OrderService(orderPort);
+    public OrderUseCase orderUseCase(OrderPort orderPort, InvoiceGeneratorPort invoiceGeneratorPort) {
+        return new OrderService(orderPort, invoiceGeneratorPort);
     }
 }
