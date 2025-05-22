@@ -1,25 +1,26 @@
 package com.mysite.modelpublic.dto;
 
 import com.mysite.model.Cart;
-import com.mysite.model.ProductConfiguration;
+import com.mysite.model.CartItemConfiguration;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Set;
 
 public class CartItemDTO {
     private Long id;
-    private Cart cart;
     private Long productId;
     private Long quantity;
     private BigDecimal price;
-    private List<ProductConfiguration> chosenConfiguration;
+    private Long cartId;
+    private Set<CartItemConfigurationDTO> chosenConfiguration;
 
-    public CartItemDTO(Long id, Cart cart, Long productId, Long quantity, BigDecimal price, List<ProductConfiguration> chosenConfiguration) {
+    public CartItemDTO(Long id, Long productId, Long quantity, BigDecimal price, Long cartId, Set<CartItemConfigurationDTO> chosenConfiguration) {
         this.id = id;
-        this.cart = cart;
         this.productId = productId;
         this.quantity = quantity;
         this.price = price;
+        this.cartId = cartId;
         this.chosenConfiguration = chosenConfiguration;
     }
 
@@ -34,12 +35,12 @@ public class CartItemDTO {
         this.id = id;
     }
 
-    public Cart getCart() {
-        return cart;
+    public Long getCartId() {
+        return cartId;
     }
 
-    public void setCart(Cart cart) {
-        this.cart = cart;
+    public void setCartId(Long cartId) {
+        this.cartId = cartId;
     }
 
     public Long getProductId() {
@@ -66,11 +67,11 @@ public class CartItemDTO {
         this.price = price;
     }
 
-    public List<ProductConfiguration> getChosenConfiguration() {
+    public Set<CartItemConfigurationDTO> getChosenConfiguration() {
         return chosenConfiguration;
     }
 
-    public void setChosenConfiguration(List<ProductConfiguration> chosenConfiguration) {
+    public void setChosenConfiguration(Set<CartItemConfigurationDTO> chosenConfiguration) {
         this.chosenConfiguration = chosenConfiguration;
     }
 }

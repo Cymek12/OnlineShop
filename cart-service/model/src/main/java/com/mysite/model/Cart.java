@@ -1,23 +1,25 @@
 package com.mysite.model;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class Cart {
     private Long id;
-    private List<CartItem> addedProducts;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private Set<CartItem> addedProducts;
     private Long userId;
 
     public Cart() {
     }
 
-    public Cart(Long id, List<CartItem> addedProducts, LocalDateTime createdAt, LocalDateTime updatedAt, Long userId) {
+    public Cart(Long id, LocalDateTime createdAt, LocalDateTime updatedAt, Set<CartItem> addedProducts, Long userId) {
         this.id = id;
-        this.addedProducts = addedProducts;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.addedProducts = addedProducts;
         this.userId = userId;
     }
 
@@ -29,11 +31,11 @@ public class Cart {
         this.id = id;
     }
 
-    public List<CartItem> getAddedProducts() {
+    public Set<CartItem> getAddedProducts() {
         return addedProducts;
     }
 
-    public void setAddedProducts(List<CartItem> addedProducts) {
+    public void setAddedProducts(Set<CartItem> addedProducts) {
         this.addedProducts = addedProducts;
     }
 

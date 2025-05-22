@@ -1,24 +1,24 @@
-package com.mysite.adapters.out.persistance.entity;
-
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+package com.mysite.modelpublic.dto;
 
 import java.math.BigDecimal;
 
-@Entity
-@AllArgsConstructor
-@NoArgsConstructor
-@Table(name = "chosen_product_configuration")
-public class ProductConfigurationEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class CartItemConfigurationDTO {
     private Long id;
     private String configurationType;
     private String value;
     private BigDecimal additionalPrice;
-    @Column(name = "cart_item_id")
     private Long cartItemId;
+
+    public CartItemConfigurationDTO() {
+    }
+
+    public CartItemConfigurationDTO(Long id, String configurationType, String value, BigDecimal additionalPrice, Long cartItemId) {
+        this.id = id;
+        this.configurationType = configurationType;
+        this.value = value;
+        this.additionalPrice = additionalPrice;
+        this.cartItemId = cartItemId;
+    }
 
     public Long getId() {
         return id;

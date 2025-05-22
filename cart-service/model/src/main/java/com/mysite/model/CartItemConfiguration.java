@@ -3,20 +3,28 @@ package com.mysite.model;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-public class ProductConfiguration {
+public class CartItemConfiguration {
     private Long id;
     private String configurationType;
     private String value;
     private BigDecimal additionalPrice;
-    private Long productId;
+    private Long cartItemId;
 
-    public ProductConfiguration() {
+    public CartItemConfiguration() {
+    }
+
+    public CartItemConfiguration(Long id, String configurationType, String value, BigDecimal additionalPrice, Long cartItemId) {
+        this.id = id;
+        this.configurationType = configurationType;
+        this.value = value;
+        this.additionalPrice = additionalPrice;
+        this.cartItemId = cartItemId;
     }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        ProductConfiguration that = (ProductConfiguration) o;
+        CartItemConfiguration that = (CartItemConfiguration) o;
         return Objects.equals(configurationType, that.configurationType)
                 && Objects.equals(value, that.value);
     }
@@ -54,11 +62,11 @@ public class ProductConfiguration {
         this.additionalPrice = additionalPrice;
     }
 
-    public Long getProductId() {
-        return productId;
+    public Long getCartItemId() {
+        return cartItemId;
     }
 
-    public void setProductId(Long productId) {
-        this.productId = productId;
+    public void setCartItemId(Long cartItemId) {
+        this.cartItemId = cartItemId;
     }
 }

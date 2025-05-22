@@ -2,10 +2,11 @@ package com.mysite.modelpublic.dto;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 public class CartDTO {
     private Long id;
-    private List<CartItemDTO> addedProducts;
+    private Set<CartItemDTO> addedProducts;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private Long userId;
@@ -13,7 +14,7 @@ public class CartDTO {
     public CartDTO() {
     }
 
-    public CartDTO(Long id, List<CartItemDTO> addedProducts, LocalDateTime createdAt, LocalDateTime updatedAt, Long userId) {
+    public CartDTO(Long id, Set<CartItemDTO> addedProducts, LocalDateTime createdAt, LocalDateTime updatedAt, Long userId) {
         this.id = id;
         this.addedProducts = addedProducts;
         this.createdAt = createdAt;
@@ -29,11 +30,11 @@ public class CartDTO {
         this.id = id;
     }
 
-    public List<CartItemDTO> getAddedProducts() {
+    public Set<CartItemDTO> getAddedProducts() {
         return addedProducts;
     }
 
-    public void setAddedProducts(List<CartItemDTO> addedProducts) {
+    public void setAddedProducts(Set<CartItemDTO> addedProducts) {
         this.addedProducts = addedProducts;
     }
 

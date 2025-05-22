@@ -4,20 +4,18 @@ import java.math.BigDecimal;
 
 public class ProductConfigurationDTO {
     private Long id;
-    private String configurationType;
+    private String name;
     private String value;
     private BigDecimal additionalPrice;
-    private Long productId;
 
-    public ProductConfigurationDTO() {
-    }
-
-    public ProductConfigurationDTO(Long id, String configurationType, String value, BigDecimal additionalPrice, Long productId) {
+    public ProductConfigurationDTO(Long id, String name, String value, BigDecimal additionalPrice) {
         this.id = id;
-        this.configurationType = configurationType;
+        this.name = name;
         this.value = value;
         this.additionalPrice = additionalPrice;
-        this.productId = productId;
+    }
+
+    public ProductConfigurationDTO() {
     }
 
     public Long getId() {
@@ -28,12 +26,12 @@ public class ProductConfigurationDTO {
         this.id = id;
     }
 
-    public String getConfigurationType() {
-        return configurationType;
+    public String getName() {
+        return name;
     }
 
-    public void setConfigurationType(String configurationType) {
-        this.configurationType = configurationType;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getValue() {
@@ -50,13 +48,5 @@ public class ProductConfigurationDTO {
 
     public void setAdditionalPrice(BigDecimal additionalPrice) {
         this.additionalPrice = additionalPrice;
-    }
-
-    public Long getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Long productId) {
-        this.productId = productId;
     }
 }

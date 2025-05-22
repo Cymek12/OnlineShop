@@ -6,6 +6,7 @@ import com.mysite.core.port.out.CartPort;
 import com.mysite.model.Cart;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 @RequiredArgsConstructor
@@ -15,6 +16,7 @@ public class CartRepository implements CartPort {
     private final CartMapper cartMapper;
 
     @Override
+    @Transactional
     public Cart save(Cart cart) {
         CartEntity entity = cartMapper.toEntity(cart);
         CartEntity saved = repository.save(entity);
@@ -22,11 +24,13 @@ public class CartRepository implements CartPort {
     }
 
     @Override
+    @Transactional
     public boolean existsById(Long id) {
         return repository.existsById(id);
     }
 
     @Override
+    @Transactional
     public Optional<Cart> findById(Long id) {
         Optional<CartEntity> optionalCartEntity = repository.findById(id);
         if(optionalCartEntity.isPresent()){
@@ -36,6 +40,7 @@ public class CartRepository implements CartPort {
     }
 
     @Override
+    @Transactional
     public Optional<Cart> findByUserId(Long id) {
         Optional<CartEntity> optionalCartEntity = repository.findFullByUserId(id);
         if(optionalCartEntity.isPresent()){

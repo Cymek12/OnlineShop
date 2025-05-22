@@ -1,29 +1,29 @@
 package com.mysite.model;
 
 import java.math.BigDecimal;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 public class CartItem {
     private Long id;
-    private Cart cart;
     private Long productId;
     private Long quantity;
     private BigDecimal price;
-    private List<ProductConfiguration> chosenConfiguration;
+    private Long cartId;
+    private Set<CartItemConfiguration> chosenConfiguration;
 
-    public CartItem(Long id, Cart cart, Long productId, Long quantity, BigDecimal price, List<ProductConfiguration> chosenConfiguration) {
+    public CartItem(Long id, Long productId, Long quantity, BigDecimal price, Long cartId, Set<CartItemConfiguration> chosenConfiguration) {
         this.id = id;
-        this.cart = cart;
         this.productId = productId;
         this.quantity = quantity;
         this.price = price;
+        this.cartId = cartId;
         this.chosenConfiguration = chosenConfiguration;
     }
 
     public boolean isCartItemDataNull() {
-        return Objects.isNull(this.getCart()) ||
+        return Objects.isNull(this.getCartId()) ||
                 Objects.isNull(this.getProductId()) ||
                 Objects.isNull(this.getQuantity()) ||
                 Objects.isNull(this.getPrice()) ||
@@ -53,12 +53,12 @@ public class CartItem {
         this.id = id;
     }
 
-    public Cart getCart() {
-        return cart;
+    public Long getCartId() {
+        return cartId;
     }
 
-    public void setCart(Cart cart) {
-        this.cart = cart;
+    public void setCartId(Long cartId) {
+        this.cartId = cartId;
     }
 
     public Long getProductId() {
@@ -85,11 +85,11 @@ public class CartItem {
         this.price = price;
     }
 
-    public List<ProductConfiguration> getChosenConfiguration() {
+    public Set<CartItemConfiguration> getChosenConfiguration() {
         return chosenConfiguration;
     }
 
-    public void setChosenConfiguration(List<ProductConfiguration> chosenConfiguration) {
+    public void setChosenConfiguration(Set<CartItemConfiguration> chosenConfiguration) {
         this.chosenConfiguration = chosenConfiguration;
     }
 }

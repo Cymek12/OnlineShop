@@ -1,33 +1,33 @@
 package com.mysite.adapters.out.persistance.entity;
 
+import com.mysite.model.CartItem;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDateTime;
-import java.util.List;
+import java.math.BigDecimal;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
-@Table(name = "cart")
 @AllArgsConstructor
 @NoArgsConstructor
-@Setter
+@Table(name = "cart_item_configuration")
 @Getter
-public class CartEntity {
+@Setter
+public class CartItemConfigurationEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<CartItemEntity> addedProducts;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-    private Long userId;
+    private String configurationType;
+    private String value;
+    private BigDecimal additionalPrice;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "cart_item_id")
+    private CartItemEntity cartItem;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof CartEntity other))
+        if (!(o instanceof CartItemConfigurationEntity other))
             return false;
         return id != null && id.equals(other.getId());
     }

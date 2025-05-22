@@ -4,25 +4,26 @@ import com.mysite.core.exception.CartDoesNotExists;
 import com.mysite.core.exception.CartItemDataIsNullException;
 import com.mysite.core.exception.CartItemDoesNotExists;
 import com.mysite.core.port.in.CartUseCase;
-import com.mysite.core.port.out.CartItemPort;
 import com.mysite.core.port.out.CartPort;
+import com.mysite.core.port.out.ProductPort;
 import com.mysite.model.Cart;
 import com.mysite.model.CartItem;
-import com.mysite.model.ProductConfiguration;
+import com.mysite.model.CartItemConfiguration;
 import com.mysite.modelpublic.command.AddProductToCartCommand;
+import com.mysite.modelpublic.dto.ProductConfigurationDTO;
+import com.mysite.modelpublic.dto.ProductDTO;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class CartService implements CartUseCase {
     private final CartPort cartPort;
-    private final CartItemPort cartItemPort;
+    private final ProductPort productPort;
 
-    public CartService(CartPort cartPort, CartItemPort cartItemPort) {
+    public CartService(CartPort cartPort, ProductPort productPort) {
         this.cartPort = cartPort;
-        this.cartItemPort = cartItemPort;
+        this.productPort = productPort;
     }
 
     @Override
@@ -30,8 +31,8 @@ public class CartService implements CartUseCase {
         Cart cart = cartPort.findByUserId(request.getUserId())
                 .orElseGet(() -> createNewCart(request.getUserId()));
 
-        CartItem newItem = toCartItem(request);
-        newItem.setCart(cart);
+        CartItem newItem = toCartItem(request, cart.getId());
+        newItem.setCartId(cart.getId());
 
         Optional<CartItem> existingItem = cart.getAddedProducts().stream()
                 .filter(item -> isSameItem(item, newItem))
@@ -52,23 +53,42 @@ public class CartService implements CartUseCase {
                 && isSameConfiguration(a.getChosenConfiguration(), b.getChosenConfiguration());
     }
 
-    private boolean isSameConfiguration(List<ProductConfiguration> a, List<ProductConfiguration> b) {
+    private boolean isSameConfiguration(Set<CartItemConfiguration> a, Set<CartItemConfiguration> b) {
         if (a.size() != b.size()) return false;
 
-        for (ProductConfiguration configA : a) {
-            boolean match = b.stream().anyMatch(configB -> configA.equals(configB));
+        for (CartItemConfiguration configA : a) {
+            boolean match = b.stream().anyMatch(configA::equals);
             if (!match) return false;
         }
         return true;
     }
 
-    private CartItem toCartItem(AddProductToCartCommand request) {
+    private CartItem toCartItem(AddProductToCartCommand request, Long cartId) {
+        ProductDTO productDTO = productPort.getProduct(String.valueOf(request.getProductId()));
         CartItem cartItem = new CartItem();
-        cartItem.setProductId(request.getProductId());
+        cartItem.setCartId(cartId);
+        cartItem.setProductId(productDTO.getId());
         cartItem.setQuantity(request.getQuantity());
-        cartItem.setPrice(request.getPrice());
-        cartItem.setChosenConfiguration(request.getChosenConfiguration());
+
+        Set<CartItemConfiguration> chosenConfigurations = mapChosenConfiguration(productDTO, request.getConfigurationIds(), cartId);
+
+        cartItem.setChosenConfiguration(chosenConfigurations);
         return cartItem;
+    }
+
+    private Set<CartItemConfiguration> mapChosenConfiguration(ProductDTO productDTO, List<Long> configurationIds, Long cartId){
+        return productDTO.getConfigurations().stream()
+                .filter(config -> configurationIds.contains(config.getId()))
+                .map(config -> {
+                    CartItemConfiguration cartConfig = new CartItemConfiguration();
+                    cartConfig.setId(config.getId());
+                    cartConfig.setConfigurationType(config.getName());
+                    cartConfig.setValue(config.getValue());
+                    cartConfig.setAdditionalPrice(config.getAdditionalPrice());
+                    cartConfig.setCartItemId(cartId);
+                    return cartConfig;
+                })
+                .collect(Collectors.toSet());
     }
 
     private Cart createNewCart(Long userId) {
@@ -76,12 +96,12 @@ public class CartService implements CartUseCase {
         newCart.setUserId(userId);
         newCart.setCreatedAt(LocalDateTime.now());
         newCart.setUpdatedAt(LocalDateTime.now());
-        newCart.setAddedProducts(new ArrayList<>());
+        newCart.setAddedProducts(new HashSet<>());
         return cartPort.save(newCart);
     }
 
     private void validateCartItemData(CartItem cartItem) {
-        if (!cartItem.isCartItemDataNull()) {
+        if (cartItem.isCartItemDataNull()) {
             throw new CartItemDataIsNullException("CartIdem data cannot be null");
         }
     }
@@ -89,16 +109,17 @@ public class CartService implements CartUseCase {
     @Override
     public void deleteCartItem(Long cartId, Long cartItemId, Long quantity) {
         Cart cart = cartPort.findById(cartId)
-                .orElseThrow(() -> new CartDoesNotExists("Cart with id: " + cartId + " does not exists"));
+                .orElseThrow(() -> new CartDoesNotExists("Cart with id: " + cartId + " does not exist"));
         CartItem cartItem = cart.getAddedProducts().stream()
                 .filter(item -> item.getId().equals(cartItemId))
                 .findFirst()
-                .orElseThrow(() -> new CartItemDoesNotExists("In cart with id: " + cartId + " item with id: " + cartItemId + " does not exists"));
+                .orElseThrow(() -> new CartItemDoesNotExists("In cart with id: " + cartId + " item with id: " + cartItemId + " does not exist"));
         if (cartItem.getQuantity() > quantity) {
             cartItem.setQuantity(cartItem.getQuantity() - quantity);
-            cartItemPort.save(cartItem);
-        } else if (cartItem.getQuantity() <= quantity) {
-            cartItemPort.delete(cartItem);
+            cartPort.save(cart);
+        } else {
+            cart.getAddedProducts().remove(cartItem);
+            cartPort.save(cart);
         }
     }
 

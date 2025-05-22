@@ -1,26 +1,29 @@
 package com.mysite.modelpublic.command;
 
-import com.mysite.model.ProductConfiguration;
-
-import java.math.BigDecimal;
 import java.util.List;
 
 public class AddProductToCartCommand {
     private Long userId;
     private Long productId;
     private Long quantity;
-    private BigDecimal price;
-    private List<ProductConfiguration> chosenConfiguration;
+    private List<Long> configurationIds;
 
-    public AddProductToCartCommand(Long userId, Long productId, Long quantity, BigDecimal price, List<ProductConfiguration> chosenConfiguration) {
+    public AddProductToCartCommand(Long userId, Long productId, Long quantity, List<Long> configurationIds) {
         this.userId = userId;
         this.productId = productId;
         this.quantity = quantity;
-        this.price = price;
-        this.chosenConfiguration = chosenConfiguration;
+        this.configurationIds = configurationIds;
     }
 
     public AddProductToCartCommand() {
+    }
+
+    public List<Long> getConfigurationIds() {
+        return configurationIds;
+    }
+
+    public void setConfigurationIds(List<Long> configurationIds) {
+        this.configurationIds = configurationIds;
     }
 
     public Long getUserId() {
@@ -47,19 +50,5 @@ public class AddProductToCartCommand {
         this.quantity = quantity;
     }
 
-    public BigDecimal getPrice() {
-        return price;
-    }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
-    public List<ProductConfiguration> getChosenConfiguration() {
-        return chosenConfiguration;
-    }
-
-    public void setChosenConfiguration(List<ProductConfiguration> chosenConfiguration) {
-        this.chosenConfiguration = chosenConfiguration;
-    }
 }
