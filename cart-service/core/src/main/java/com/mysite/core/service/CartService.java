@@ -10,7 +10,6 @@ import com.mysite.model.Cart;
 import com.mysite.model.CartItem;
 import com.mysite.model.CartItemConfiguration;
 import com.mysite.modelpublic.command.AddProductToCartCommand;
-import com.mysite.modelpublic.dto.ProductConfigurationDTO;
 import com.mysite.modelpublic.dto.ProductDTO;
 
 import java.time.LocalDateTime;
