@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 public class BeanConfig {
 
     @Bean
-    public ProductUseCase productUseCase(ProductPort productPort) {
+    public ProductService productService(ProductPort productPort) {
         return new ProductService(productPort);
     }
 }

@@ -2,6 +2,7 @@ package com.mysite.adapters.in.web;
 
 import com.mysite.adapters.in.web.mapper.ProductMapper;
 import com.mysite.core.port.in.ProductUseCase;
+import com.mysite.core.service.ProductService;
 import com.mysite.model.*;
 import com.mysite.publicmodel.command.ProductCommand;
 import com.mysite.publicmodel.dto.ProductConfigurationDTO;
@@ -16,7 +17,7 @@ import java.util.List;
 @RequestMapping("/products")
 @RequiredArgsConstructor
 public class ProductController {
-    private final ProductUseCase productUseCase;
+    private final ProductService productUseCase;
     private final ProductMapper productMapper;
 
     @PostMapping
