@@ -13,7 +13,7 @@ services:
     depends_on:
       - dbProduct
     networks:
-      - my-network
+      - shared-network
 
   dbProduct:
     image: postgres:13
@@ -27,7 +27,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
-      - my-network
+      - shared-network
 
   pgAdmin:
     image: elestio/pgadmin
@@ -41,11 +41,12 @@ services:
     volumes:
       - pgadmin_data:/var/lib/pgadmin
     networks:
-      - my-network
+      - shared-network
 
 volumes:
   postgres_data:
   pgadmin_data:
 
 networks:
-  my-network: {}
+  shared-network:
+    external: true
