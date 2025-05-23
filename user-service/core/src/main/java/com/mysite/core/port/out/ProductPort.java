@@ -7,5 +7,5 @@ import com.mysite.model.ProductDTO;
 public interface ProductPort {
     ProductDTO getProduct(String id);
 
-    PageContent<ProductDTO> getAllProducts(MyPageable pageable, String productType);
+    PageContent<ProductDTO> getAllProducts(int size, int page, String productType);
 }
