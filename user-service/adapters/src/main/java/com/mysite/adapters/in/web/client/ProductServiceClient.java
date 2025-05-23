@@ -1,5 +1,7 @@
 package com.mysite.adapters.in.web.client;
 
+import com.mysite.adapters.config.FeignConfig;
+import com.mysite.adapters.config.ProductFallbackFactory;
 import com.mysite.core.port.out.ProductPort;
 import com.mysite.model.PageContent;
 import com.mysite.model.ProductDTO;
@@ -9,8 +11,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @FeignClient(
-        value = "app",
-        url = "${spring.cloud.openfeign.client.config.postClient.url}"
+        value = "productService",
+        url = "${spring.cloud.openfeign.client.config.productService.url}",
+        configuration = FeignConfig.class,
+        fallbackFactory = ProductFallbackFactory.class
 )
 public interface ProductServiceClient extends ProductPort {
     @GetMapping("/products/{id}")
