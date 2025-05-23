@@ -13,7 +13,7 @@ services:
     depends_on:
       - dbCart
     networks:
-      - cart-network
+      - shared-network
 
   dbCart:
     image: postgres:13
@@ -27,11 +27,12 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
-      - cart-network
+      - shared-network
 
 volumes:
   postgres_data:
   pgadmin_data:
 
 networks:
-  cart-network: {}
+  shared-network:
+    external: true
