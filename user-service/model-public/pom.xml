@@ -5,23 +5,25 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.mysite</groupId>
-        <artifactId>onlineshop</artifactId>
+        <artifactId>user-service</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>user-service</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>adapters</module>
-        <module>core</module>
-        <module>model</module>
-        <module>model-public</module>
-    </modules>
+    <artifactId>model-public</artifactId>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.mysite</groupId>
+            <artifactId>model</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 
 </project>

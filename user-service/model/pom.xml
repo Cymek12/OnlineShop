@@ -5,18 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.mysite</groupId>
-        <artifactId>onlineshop</artifactId>
+        <artifactId>user-service</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>user-service</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>adapters</module>
-        <module>core</module>
-        <module>model</module>
-        <module>model-public</module>
-    </modules>
+    <artifactId>model</artifactId>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
