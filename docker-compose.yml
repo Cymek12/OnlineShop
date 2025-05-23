@@ -1,6 +1,20 @@
 version: '3.8'
 
 services:
+  product:
+    image: productimage
+    container_name: product_service
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://dbProduct:5432/onlineshop-product
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: admin
+    ports:
+      - "8080:8080"
+    depends_on:
+      - dbProduct
+    networks:
+      - my-network
+
   dbProduct:
     image: postgres:13
     container_name: product_db_postgres
@@ -9,7 +23,7 @@ services:
       POSTGRES_PASSWORD: admin
       POSTGRES_DB: onlineshop-product
     ports:
-      - "5432:5432"
+      - "8081:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
@@ -26,20 +40,6 @@ services:
       - "9090:9090"
     volumes:
       - pgadmin_data:/var/lib/pgadmin
-    networks:
-      - my-network
-
-  product:
-    image: productimage
-    container_name: product_service
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://dbProduct:5432/onlineshop-product
-      SPRING_DATASOURCE_USERNAME: admin
-      SPRING_DATASOURCE_PASSWORD: admin
-    ports:
-      - "8080:8080"
-    depends_on:
-      - dbProduct
     networks:
       - my-network
 
