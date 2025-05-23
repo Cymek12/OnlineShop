@@ -10,6 +10,7 @@ import com.mysite.modelPublic.command.OrderDTO;
 import com.mysite.modelPublic.command.UpdateOrderCommand;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -57,7 +58,7 @@ public class OrderController {
                 list);
     }
 
-    @PostMapping("/invoice")
+    @PostMapping(value = "/invoice", produces = MediaType.APPLICATION_PDF_VALUE)
     public byte[] generateInvoice() {
         return orderUseCase.generateInvoice();
     }

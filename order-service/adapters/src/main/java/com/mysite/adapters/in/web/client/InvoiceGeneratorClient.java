@@ -1,5 +1,6 @@
 package com.mysite.adapters.in.web.client;
 
+import com.mysite.core.port.out.InvoiceGeneratorPort;
 import feign.Headers;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
         name = "invoiceGeneratorClient",
         url = "https://invoice-generator.com"
 )
-public interface InvoiceGeneratorClient {
+public interface InvoiceGeneratorClient extends InvoiceGeneratorPort {
 
     @PostMapping(
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,

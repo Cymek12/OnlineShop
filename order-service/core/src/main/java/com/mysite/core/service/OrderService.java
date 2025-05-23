@@ -53,10 +53,6 @@ public class OrderService implements OrderUseCase {
 
         MultiValueMap<String, String> formData = new LinkedMultiValueMap<>();
         formData.add("from", "Moja Firma Sp. z o.o.");
-        formData.add("from_street", "ul. Przykładowa 1");
-        formData.add("from_city", "Warszawa");
-        formData.add("from_zip", "00-001");
-        formData.add("from_country", "Polska");
 
         formData.add("to", "Jan" + " " + "Kowalski");
         formData.add("date", LocalDateTime.now().toString());
