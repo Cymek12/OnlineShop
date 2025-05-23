@@ -23,23 +23,9 @@ services:
       POSTGRES_PASSWORD: admin
       POSTGRES_DB: onlineshop-cart
     ports:
-      - "5432:5432"
+      - "7071:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-    networks:
-      - cart-network
-
-  pgAdmin:
-    image: elestio/pgadmin
-    container_name: cart_pgAdmin
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@gmail.com
-      PGADMIN_DEFAULT_PASSWORD: admin
-      PGADMIN_LISTEN_PORT: 9090
-    ports:
-      - "9090:9090"
-    volumes:
-      - pgadmin_data:/var/lib/pgadmin
     networks:
       - cart-network
 
