@@ -1,6 +1,6 @@
 package com.mysite.adapters.in.web;
 
-import com.mysite.core.port.in.UserUseCase;
+import com.mysite.core.service.UserService;
 import com.mysite.model.ProductDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping
 @RequiredArgsConstructor
 public class UserController {
-    private final UserUseCase userUseCase;
+    private final UserService userService;
 
     @GetMapping("/products/{id}")
     ProductDTO getProduct(@PathVariable String id){
-        return userUseCase.getProduct(id);
+        return userService.getProduct(id);
     }
 }
