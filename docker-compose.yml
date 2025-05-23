@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  cart:
+    image: cartimage
+    container_name: cart_service
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://dbCart:5432/onlineshop-cart
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: admin
+    ports:
+      - "7070:7070"
+    depends_on:
+      - dbCart
+    networks:
+      - cart-network
+
+  dbCart:
+    image: postgres:13
+    container_name: cart_db_postgres
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: onlineshop-cart
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - cart-network
+
+  pgAdmin:
+    image: elestio/pgadmin
+    container_name: cart_pgAdmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_LISTEN_PORT: 9090
+    ports:
+      - "9090:9090"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    networks:
+      - cart-network
+
+volumes:
+  postgres_data:
+  pgadmin_data:
+
+networks:
+  cart-network: {}
