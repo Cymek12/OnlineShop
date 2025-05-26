@@ -44,7 +44,7 @@ services:
       - shared-network
 
 volumes:
-  postgres_data:
+  postgres_data_product:
   pgadmin_data:
 
 networks:
