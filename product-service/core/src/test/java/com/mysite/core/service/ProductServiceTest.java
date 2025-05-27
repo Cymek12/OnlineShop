@@ -1,7 +1,7 @@
 package com.mysite.core.service;
 
 import com.mysite.core.exception.ProductAlreadyExistsException;
-import com.mysite.core.port.out.ProductPort;
+import com.mysite.core.port.out.ProductOperations;
 import com.mysite.model.Product;
 import com.mysite.model.ProductType;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,13 +16,13 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 public class ProductServiceTest {
-    private ProductPort productPort;
-    private ProductService productService;
+    private ProductOperations productPort;
+    private ProductServiceImpl productService;
 
     @BeforeEach
     void setUp() {
-        this.productPort = Mockito.mock(ProductPort.class);
-        this.productService = new ProductService(productPort);
+        this.productPort = Mockito.mock(ProductOperations.class);
+        this.productService = new ProductServiceImpl(productPort);
     }
 
     @Test

@@ -7,7 +7,7 @@ import com.mysite.model.ProductType;
 
 import java.util.Optional;
 
-public interface ProductPort {
+public interface ProductOperations {
     Product save(Product product);
 
     Optional<Product> findById(Long id);

@@ -3,29 +3,27 @@ package com.mysite.core.service;
 import com.mysite.core.exception.ProductAlreadyExistsException;
 import com.mysite.core.exception.ProductDataCannotBeNull;
 import com.mysite.core.exception.ProductNotFoundException;
-import com.mysite.core.port.in.ProductUseCase;
-import com.mysite.core.port.out.ProductPort;
+import com.mysite.core.port.in.ProductService;
+import com.mysite.core.port.out.ProductOperations;
 import com.mysite.model.*;
+import lombok.RequiredArgsConstructor;
 
-public class ProductService implements ProductUseCase {
-    private final ProductPort productPort;
-
-    public ProductService(ProductPort productPort) {
-        this.productPort = productPort;
-    }
+@RequiredArgsConstructor
+public class ProductServiceImpl implements ProductService {
+    private final ProductOperations productOperations;
 
     @Override
     public Product addProduct(Product product) {
-        if (productPort.existsByName(product.getName())) {
+        if (productOperations.existsByName(product.getName())) {
             throw new ProductAlreadyExistsException("Product with name: " + product.getName() + " already exists");
         }
         validateProductData(product);
-        return productPort.save(product);
+        return productOperations.save(product);
     }
 
     @Override
     public Product getProductById(Long id) {
-        return productPort.findById(id)
+        return productOperations.findById(id)
                 .orElseThrow(() -> new ProductNotFoundException("Product with id: " + id + " does not exists"));
     }
 
@@ -33,9 +31,9 @@ public class ProductService implements ProductUseCase {
     public PageContent<Product> getAllProducts(MyPageable pageable, String productTypeCommand) {
         if (productTypeCommand != null) {
             ProductType productType = ProductType.valueOf(productTypeCommand.toUpperCase());
-            return productPort.findByProductType(productType, pageable);
+            return productOperations.findByProductType(productType, pageable);
         }
-        return productPort.findAll(pageable);
+        return productOperations.findAll(pageable);
     }
 
     @Override
@@ -43,13 +41,13 @@ public class ProductService implements ProductUseCase {
         Product productToUpdate = getProductById(idProductToUpdate);
         validateProductData(productNewData);
         productToUpdate.update(productNewData);
-        return productPort.save(productToUpdate);
+        return productOperations.save(productToUpdate);
     }
 
     @Override
     public void deleteProduct(Long id) {
         Product productToDelete = getProductById(id);
-        productPort.delete(productToDelete);
+        productOperations.delete(productToDelete);
     }
 
     private void validateProductData(Product product) {

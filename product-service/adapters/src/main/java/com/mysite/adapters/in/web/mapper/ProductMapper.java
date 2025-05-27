@@ -8,86 +8,24 @@ import com.mysite.publicmodel.command.ProductCommand;
 import com.mysite.publicmodel.command.ProductConfigurationCommand;
 import com.mysite.publicmodel.dto.ProductConfigurationDTO;
 import com.mysite.publicmodel.dto.ProductDTO;
-import org.springframework.stereotype.Component;
+import org.mapstruct.Mapper;
 
-@Component
-public class ProductMapper {
+@Mapper(componentModel = "spring")
+public interface ProductMapper {
 
-    public Product toDomain(ProductEntity productEntity) {
-        Product product = new Product();
-        product.setId(productEntity.getId());
-        product.setName(productEntity.getName());
-        product.setPrice(productEntity.getPrice());
-        product.setProductType(productEntity.getProductType());
-        product.setConfigurations(productEntity.getConfigurations().stream().map(this::toDomain).toList());
-        return product;
-    }
+    Product toDomain(ProductEntity productEntity);
 
-    public ProductEntity toEntity(Product product) {
-        ProductEntity productEntity = new ProductEntity();
-        productEntity.setId(product.getId());
-        productEntity.setName(product.getName());
-        productEntity.setPrice(product.getPrice());
-        productEntity.setProductType(product.getProductType());
-        productEntity.setConfigurations(product.getConfigurations().stream().map(this::toEntity).toList());
-        return productEntity;
-    }
+    ProductEntity toEntity(Product product);
 
-    public ProductDTO toDto(Product product) {
-        ProductDTO productDTO = new ProductDTO();
-        productDTO.setId(product.getId());
-        productDTO.setName(product.getName());
-        productDTO.setPrice(product.getPrice());
-        productDTO.setProductType(product.getProductType());
-        productDTO.setConfigurations(product.getConfigurations().stream().map(this::toDto).toList());
-        return productDTO;
-    }
+    ProductDTO toDto(Product product);
 
-    public ProductConfiguration toDomain(ProductConfigurationEntity entity) {
-        ProductConfiguration domain = new ProductConfiguration();
-        domain.setId(entity.getId());
-        domain.setName(entity.getName());
-        domain.setValue(entity.getValue());
-        domain.setAdditionalPrice(entity.getAdditionalPrice());
-        domain.setProductId(entity.getProduct().getId());
-        return domain;
-    }
+    ProductConfiguration toDomain(ProductConfigurationEntity entity);
 
-    public ProductConfigurationEntity toEntity(ProductConfiguration domain) {
-        ProductConfigurationEntity entity = new ProductConfigurationEntity();
-        ProductEntity productEntity = new ProductEntity();
-        productEntity.setId(domain.getId());
-        entity.setId(domain.getId());
-        entity.setName(domain.getName());
-        entity.setValue(domain.getValue());
-        entity.setAdditionalPrice(domain.getAdditionalPrice());
-        entity.setProduct(productEntity);
-        return entity;
-    }
+    ProductConfigurationEntity toEntity(ProductConfiguration domain);
 
-    public ProductConfigurationDTO toDto(ProductConfiguration domain) {
-        ProductConfigurationDTO dto = new ProductConfigurationDTO();
-        dto.setId(domain.getId());
-        dto.setName(domain.getName());
-        dto.setValue(domain.getValue());
-        dto.setAdditionalPrice(domain.getAdditionalPrice());
-        return dto;
-    }
+    ProductConfigurationDTO toDto(ProductConfiguration domain);
 
-    public Product toDomain(ProductCommand productCommand) {
-        Product product = new Product();
-        product.setName(productCommand.getName());
-        product.setProductType(productCommand.getProductType());
-        product.setPrice(productCommand.getPrice());
-        product.setConfigurations(productCommand.getConfigurations().stream().map(this::toDomain).toList());
-        return product;
-    }
+    Product toDomain(ProductCommand productCommand);
 
-    public ProductConfiguration toDomain(ProductConfigurationCommand command) {
-        ProductConfiguration domain = new ProductConfiguration();
-        domain.setName(command.getName());
-        domain.setValue(command.getValue());
-        domain.setAdditionalPrice(command.getAdditionalPrice());
-        return domain;
-    }
+    ProductConfiguration toDomain(ProductConfigurationCommand command);
 }

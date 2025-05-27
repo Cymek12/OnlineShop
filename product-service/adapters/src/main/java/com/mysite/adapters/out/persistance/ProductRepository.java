@@ -2,7 +2,7 @@ package com.mysite.adapters.out.persistance;
 
 import com.mysite.adapters.in.web.mapper.ProductMapper;
 import com.mysite.adapters.out.persistance.entity.ProductEntity;
-import com.mysite.core.port.out.ProductPort;
+import com.mysite.core.port.out.ProductOperations;
 import com.mysite.model.PageContent;
 import com.mysite.model.MyPageable;
 import com.mysite.model.Product;
@@ -15,13 +15,13 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Component
-public class ProductRepository implements ProductPort {
+public class ProductRepository implements ProductOperations {
     private final SpringDataProductRepository repository;
     private final ProductMapper productMapper;
-
 
     @Override
     public Product save(Product product) {
@@ -54,7 +54,7 @@ public class ProductRepository implements ProductPort {
     public PageContent<Product> findAll(MyPageable myPageable) {
         Pageable pageable = PageRequest.of(myPageable.getPage(), myPageable.getSize());
         Page<ProductEntity> pageContent = repository.findAll(pageable);
-        List<Product> list = pageContent.getContent().stream().map(productMapper::toDomain).toList();
+        List<Product> list = pageContent.getContent().stream().map(productMapper::toDomain).collect(Collectors.toList());
         return new PageContent<>(
                 pageContent.getTotalElements(),
                 pageContent.getNumber(),
@@ -66,7 +66,7 @@ public class ProductRepository implements ProductPort {
     public PageContent<Product> findByProductType(ProductType productType, MyPageable myPageable) {
         Pageable pageable = PageRequest.of(myPageable.getPage(), myPageable.getSize());
         Page<ProductEntity> pageContent = repository.findByProductType(productType, pageable);
-        List<Product> list = pageContent.getContent().stream().map(productMapper::toDomain).toList();
+        List<Product> list = pageContent.getContent().stream().map(productMapper::toDomain).collect(Collectors.toList());
         return new PageContent<>(
                 pageContent.getTotalElements(),
                 pageContent.getNumber(),

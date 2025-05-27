@@ -4,7 +4,7 @@ import com.mysite.model.PageContent;
 import com.mysite.model.MyPageable;
 import com.mysite.model.Product;
 
-public interface ProductUseCase {
+public interface ProductService {
     Product addProduct(Product product);
 
     Product getProductById(Long id);

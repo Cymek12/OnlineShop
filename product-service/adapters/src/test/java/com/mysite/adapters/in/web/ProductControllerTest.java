@@ -4,11 +4,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mysite.core.exception.ProductAlreadyExistsException;
 import com.mysite.core.exception.ProductDataCannotBeNull;
 import com.mysite.core.exception.ProductNotFoundException;
-import com.mysite.core.port.in.ProductUseCase;
+import com.mysite.core.port.in.ProductService;
 import com.mysite.model.MyPageable;
 import com.mysite.model.PageContent;
 import com.mysite.model.Product;
-import com.mysite.model.ProductConfiguration;
 import com.mysite.publicmodel.command.ProductCommand;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +35,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @TestPropertySource("classpath:application-test.properties")
 public class ProductControllerTest {
     @MockitoBean
-    private ProductUseCase productUseCase;
+    private ProductService productUseCase;
     @Autowired
     private ObjectMapper objectMapper;
     @Autowired
