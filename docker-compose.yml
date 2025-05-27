@@ -13,7 +13,7 @@ services:
     depends_on:
       - dbProduct
     networks:
-      - shared-network
+      - my-network
 
   dbProduct:
     image: postgres:13
@@ -25,9 +25,9 @@ services:
     ports:
       - "8081:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data_product:/var/lib/postgresql/data
     networks:
-      - shared-network
+      - my-network
 
   pgAdmin:
     image: elestio/pgadmin
@@ -37,16 +37,15 @@ services:
       PGADMIN_DEFAULT_PASSWORD: admin
       PGADMIN_LISTEN_PORT: 9090
     ports:
-      - "9090:9090"
+      - "8082:9090"
     volumes:
       - pgadmin_data:/var/lib/pgadmin
     networks:
-      - shared-network
+      - my-network
 
 volumes:
   postgres_data_product:
   pgadmin_data:
 
 networks:
-  shared-network:
-    external: true
+  my-network: {}

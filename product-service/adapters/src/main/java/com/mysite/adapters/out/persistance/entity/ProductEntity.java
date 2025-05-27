@@ -24,6 +24,6 @@ public class ProductEntity {
     private BigDecimal price;
     @Enumerated(EnumType.STRING)
     private ProductType productType;
-    @OneToMany(mappedBy = "product", cascade = {CascadeType.ALL})
+    @OneToMany(mappedBy = "product", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER, orphanRemoval = true)
     private List<ProductConfigurationEntity> configurations;
 }

@@ -22,7 +22,7 @@ public class ProductConfigurationEntity {
     private String name;
     private String value;
     private BigDecimal additionalPrice;
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
     private ProductEntity product;
 }
