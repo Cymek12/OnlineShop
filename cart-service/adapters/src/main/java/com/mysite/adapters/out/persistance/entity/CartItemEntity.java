@@ -27,16 +27,18 @@ public class CartItemEntity {
     @OneToMany(mappedBy = "cartItem", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<CartItemConfigurationEntity> chosenConfiguration;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof CartItemEntity other))
-            return false;
-        return id != null && id.equals(other.getId());
-    }
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (!(o instanceof CartItemEntity other))
+//            return false;
+//        return id != null && id.equals(other.getId());
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return getClass().hashCode();
+//    }
 
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
-    }
+
 }

@@ -24,16 +24,16 @@ public class CartItemConfigurationEntity {
     @JoinColumn(name = "cart_item_id")
     private CartItemEntity cartItem;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof CartItemConfigurationEntity other))
-            return false;
-        return id != null && id.equals(other.getId());
-    }
-
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
-    }
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (!(o instanceof CartItemConfigurationEntity other))
+//            return false;
+//        return id != null && id.equals(other.getId());
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return getClass().hashCode();
+//    }
 }

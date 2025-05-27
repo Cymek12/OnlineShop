@@ -13,7 +13,7 @@ services:
     depends_on:
       - dbCart
     networks:
-      - shared-network
+      - my-network
 
   dbCart:
     image: postgres:13
@@ -25,14 +25,27 @@ services:
     ports:
       - "7071:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data_cart:/var/lib/postgresql/data
     networks:
-      - shared-network
+      - my-network
+
+  pgAdmin:
+    image: elestio/pgadmin
+    container_name: product_pgAdmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_LISTEN_PORT: 9090
+    ports:
+      - "7072:9090"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    networks:
+      - my-network
 
 volumes:
-  postgres_data:
+  postgres_data_cart:
   pgadmin_data:
 
 networks:
-  shared-network:
-    external: true
+  my-network: {}
