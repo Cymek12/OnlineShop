@@ -22,7 +22,6 @@ public interface ProductMapper {
 
     ProductDTO toDto(Product product);
 
-    @Mapping(source = "product.id", target = "productId")
     ProductConfiguration toDomain(ProductConfigurationEntity entity);
 
     ProductConfigurationEntity toEntity(ProductConfiguration domain);
@@ -36,6 +35,4 @@ public interface ProductMapper {
     List<ProductDTO> toDto(List<Product> products);
 
     List<ProductConfigurationDTO> toDtoList(List<ProductConfiguration> productConfigurations);
-
-
 }

@@ -18,7 +18,8 @@ public class ProductServiceImpl implements ProductService {
             throw new ProductAlreadyExistsException("Product with name: " + product.getName() + " already exists");
         }
         validateProductData(product);
-        return productOperations.save(product);
+        Product savedProduct = productOperations.save(product);
+        return savedProduct;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.mysite.adapters.out.persistance;
 
 import com.mysite.adapters.in.web.mapper.ProductMapper;
+import com.mysite.adapters.out.persistance.entity.ProductConfigurationEntity;
 import com.mysite.adapters.out.persistance.entity.ProductEntity;
 import com.mysite.core.port.out.ProductOperations;
 import com.mysite.model.PageContent;
@@ -25,8 +26,12 @@ public class ProductRepository implements ProductOperations {
 
     @Override
     public Product save(Product product) {
-        ProductEntity savedEntity = repository.save(productMapper.toEntity(product));
-        return productMapper.toDomain(savedEntity);
+        ProductEntity entity = productMapper.toEntity(product);
+        ProductEntity savedEntity = repository.save(entity);
+        for (ProductConfigurationEntity configuration : savedEntity.getConfigurations()) {
+            configuration.setProduct(savedEntity);
+        }
+        return productMapper.toDomain(repository.save(savedEntity));
     }
 
     @Override
