@@ -5,8 +5,6 @@ import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @AllArgsConstructor
@@ -25,20 +23,5 @@ public class CartItemEntity {
     @JoinColumn(name = "cart_id")
     private CartEntity cart;
     @OneToMany(mappedBy = "cartItem", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<CartItemConfigurationEntity> chosenConfiguration;
-
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (!(o instanceof CartItemEntity other))
-//            return false;
-//        return id != null && id.equals(other.getId());
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return getClass().hashCode();
-//    }
-
-
+    private List<CartItemConfigurationEntity> chosenConfiguration;
 }

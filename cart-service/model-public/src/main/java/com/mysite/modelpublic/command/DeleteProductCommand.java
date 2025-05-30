@@ -5,15 +5,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class AddProductToCartCommand {
-    private Long userId;
-    private Long productId;
+public class DeleteProductCommand {
+    private Long cartId;
+    private Long cartItemId;
     private Long quantity;
-    private List<Long> configurationIds;
 }

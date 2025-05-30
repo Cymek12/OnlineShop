@@ -1,4 +1,4 @@
-package com.mysite.model;
+package com.mysite.modelpublic.dto.cart;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,9 +13,9 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Cart {
+public class CartDTO {
     private Long id;
-    private List<CartItem> addedProducts;
+    private List<CartItemDTO> addedProducts;
     private BigDecimal totalPrice;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

@@ -1,0 +1,34 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2
+      author: Kuba
+      changes:
+        - createTable:
+            tableName: cart_item
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    unique: true
+                    nullable: false
+              - column:
+                  name: product_id
+                  type: bigint
+              - column:
+                  name: quantity
+                  type: bigint
+              - column:
+                  name: price
+                  type: decimal(19,2)
+              - column:
+                  name: cart_id
+                  type: bigint
+        - addForeignKeyConstraint:
+            baseTableName: cart_item
+            baseColumnNames: cart_id
+            referencedTableName: cart
+            referencedColumnNames: id
+            constraintName: fk_cartitem_cart

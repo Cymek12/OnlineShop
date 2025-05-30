@@ -1,19 +1,19 @@
-package com.mysite.model;
+package com.mysite.modelpublic.dto.cart;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.util.Objects;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode(of = {"configurationType", "value", "additionalPrice"})
-public class CartItemConfiguration {
+public class CartItemConfigurationDTO {
     private Long id;
     private String configurationType;
     private String value;
     private BigDecimal additionalPrice;
-    private Long cartItemId;
 }

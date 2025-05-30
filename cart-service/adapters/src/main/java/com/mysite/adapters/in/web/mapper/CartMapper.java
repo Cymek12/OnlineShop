@@ -6,9 +6,9 @@ import com.mysite.adapters.out.persistance.entity.CartItemEntity;
 import com.mysite.model.Cart;
 import com.mysite.model.CartItem;
 import com.mysite.model.CartItemConfiguration;
-import com.mysite.modelpublic.dto.CartDTO;
-import com.mysite.modelpublic.dto.CartItemConfigurationDTO;
-import com.mysite.modelpublic.dto.CartItemDTO;
+import com.mysite.modelpublic.dto.cart.CartDTO;
+import com.mysite.modelpublic.dto.cart.CartItemConfigurationDTO;
+import com.mysite.modelpublic.dto.cart.CartItemDTO;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
