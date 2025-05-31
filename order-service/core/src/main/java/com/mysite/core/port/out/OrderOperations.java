@@ -4,7 +4,7 @@ import com.mysite.model.Order;
 
 import java.util.Optional;
 
-public interface OrderPort {
+public interface OrderOperations {
     Optional<Order> getOrderById(Long id);
 
     Order save(Order order);

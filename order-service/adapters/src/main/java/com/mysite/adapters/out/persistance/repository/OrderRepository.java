@@ -2,7 +2,7 @@ package com.mysite.adapters.out.persistance.repository;
 
 import com.mysite.adapters.in.web.mapper.OrderMapper;
 import com.mysite.adapters.out.persistance.entity.OrderEntity;
-import com.mysite.core.port.out.OrderPort;
+import com.mysite.core.port.out.OrderOperations;
 import com.mysite.model.Order;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @Component
-public class OrderRepository implements OrderPort {
+public class OrderRepository implements OrderOperations {
     private final SpringDataOrderRepository repository;
     private final OrderMapper orderMapper;
 

@@ -1,26 +1,23 @@
 package com.mysite.core.service;
 
-import com.mysite.core.port.in.OrderUseCase;
+import com.mysite.core.port.in.OrderService;
 import com.mysite.core.port.out.InvoiceGeneratorPort;
-import com.mysite.core.port.out.OrderPort;
+import com.mysite.core.port.out.OrderOperations;
 import com.mysite.model.MyPageable;
 import com.mysite.model.Order;
 import com.mysite.model.PageContent;
 import com.mysite.modelPublic.command.CreateOrderCommand;
 import com.mysite.modelPublic.command.UpdateOrderCommand;
+import lombok.RequiredArgsConstructor;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
 import java.time.LocalDateTime;
 
-public class OrderService implements OrderUseCase {
-    private final OrderPort orderPort;
+@RequiredArgsConstructor
+public class OrderServiceImpl implements OrderService {
+    private final OrderOperations orderOperations;
     private final InvoiceGeneratorPort invoiceGeneratorPort;
-
-    public OrderService(OrderPort orderPort, InvoiceGeneratorPort invoiceGeneratorPort) {
-        this.orderPort = orderPort;
-        this.invoiceGeneratorPort = invoiceGeneratorPort;
-    }
 
     @Override
     public Order createOrder(CreateOrderCommand request) {
@@ -34,7 +31,7 @@ public class OrderService implements OrderUseCase {
 
     @Override
     public Order getOrderById(Long id) {
-        orderPort.getOrderById(id);
+        orderOperations.getOrderById(id);
         return null;
     }
 

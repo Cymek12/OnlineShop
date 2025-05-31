@@ -12,7 +12,6 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface OrderMapper {
 
-    // === DOMAIN ↔ ENTITY ===
     OrderEntity toEntity(Order domain);
     Order toDomain(OrderEntity entity);
 
@@ -22,11 +21,10 @@ public interface OrderMapper {
     AddressEntity toEntity(Address domain);
     Address toDomain(AddressEntity entity);
 
-    // === DOMAIN ↔ DTO ===
     OrderDTO toDto(Order domain);
     Order toDomain(CreateOrderCommand dto);
 
-    Order toDomain(UpdateOrderCommand dto); // jeśli np. robisz partial update
+    Order toDomain(UpdateOrderCommand dto);
 
     CustomerDTO toDto(Customer domain);
     Customer toDomain(CustomerDTO dto);

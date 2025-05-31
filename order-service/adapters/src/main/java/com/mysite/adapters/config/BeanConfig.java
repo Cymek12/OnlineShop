@@ -1,9 +1,9 @@
 package com.mysite.adapters.config;
 
-import com.mysite.core.port.in.OrderUseCase;
+import com.mysite.core.port.in.OrderService;
 import com.mysite.core.port.out.InvoiceGeneratorPort;
-import com.mysite.core.port.out.OrderPort;
-import com.mysite.core.service.OrderService;
+import com.mysite.core.port.out.OrderOperations;
+import com.mysite.core.service.OrderServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 public class BeanConfig {
 
     @Bean
-    public OrderUseCase orderUseCase(OrderPort orderPort, InvoiceGeneratorPort invoiceGeneratorPort) {
-        return new OrderService(orderPort, invoiceGeneratorPort);
+    public OrderService orderUseCase(OrderOperations orderOperations, InvoiceGeneratorPort invoiceGeneratorPort) {
+        return new OrderServiceImpl(orderOperations, invoiceGeneratorPort);
     }
 }

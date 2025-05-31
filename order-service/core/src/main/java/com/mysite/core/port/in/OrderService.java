@@ -6,7 +6,7 @@ import com.mysite.model.PageContent;
 import com.mysite.modelPublic.command.CreateOrderCommand;
 import com.mysite.modelPublic.command.UpdateOrderCommand;
 
-public interface OrderUseCase {
+public interface OrderService {
     Order createOrder(CreateOrderCommand request);
 
     Order updateOrder(Long id, UpdateOrderCommand request);
