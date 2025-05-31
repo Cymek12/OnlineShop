@@ -8,6 +8,7 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://dbCart:5432/onlineshop-cart
       SPRING_DATASOURCE_USERNAME: admin
       SPRING_DATASOURCE_PASSWORD: admin
+      SPRING_CLOUD_OPENFEIGN_CLIENT_CONFIG_POSTCLIENT_URL: http://product:8080/products
     ports:
       - "7070:7070"
     depends_on:
