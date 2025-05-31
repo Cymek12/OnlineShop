@@ -29,6 +29,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public PageContent<CartDTO> getAllCarts(MyPageable myPageable) {
-        return cartOperations.getCarts(myPageable.getPage(), myPageable.getSize());
+        return cartOperations.getCarts(myPageable);
     }
 }

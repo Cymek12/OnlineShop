@@ -3,10 +3,12 @@ package com.mysite.adapters.in.web.client;
 import com.mysite.adapters.config.CartFallbackFactory;
 import com.mysite.adapters.config.FeignConfig;
 import com.mysite.core.port.out.CartOperations;
+import com.mysite.model.MyPageable;
 import com.mysite.model.PageContent;
 import com.mysite.modelpublic.dto.CartDTO;
 import com.mysite.modelpublic.command.AddProductToCartCommand;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,6 +25,5 @@ public interface CartServiceClient extends CartOperations {
     CartDTO addProductToCart(@RequestBody AddProductToCartCommand addProductToCartCommand);
 
     @GetMapping("/carts")
-    PageContent<CartDTO> getCarts(@RequestParam("page") int page,
-                                  @RequestParam("size") int size);
+    PageContent<CartDTO> getCarts(MyPageable myPageable);
 }
