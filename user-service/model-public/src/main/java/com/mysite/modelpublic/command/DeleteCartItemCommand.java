@@ -1,4 +1,4 @@
-package com.mysite.model;
+package com.mysite.modelpublic.command;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class MyPageable {
-    private int size;
-    private int page;
+public class DeleteCartItemCommand {
+    private Long cartId;
+    private Long cartItemId;
+    private Long quantity;
 }

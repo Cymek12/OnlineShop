@@ -1,11 +1,9 @@
 package com.mysite.adapters.config;
 
 import com.mysite.adapters.in.web.client.CartServiceClient;
-import com.mysite.adapters.in.web.client.ProductServiceClient;
 import com.mysite.core.exception.FallbackException;
-import com.mysite.model.CartDTO;
 import com.mysite.model.PageContent;
-import com.mysite.model.ProductDTO;
+import com.mysite.modelpublic.dto.CartDTO;
 import com.mysite.modelpublic.command.AddProductToCartCommand;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.openfeign.FallbackFactory;
@@ -20,7 +18,12 @@ public class CartFallbackFactory implements FallbackFactory<CartServiceClient> {
 
             @Override
             public CartDTO addProductToCart(AddProductToCartCommand addProductToCartCommand) {
-                return null;
+                throw new FallbackException("Fallback add product to cart exception");
+            }
+
+            @Override
+            public PageContent<CartDTO> getCarts(int page, int size) {
+                throw new FallbackException("Fallback get all carts exception");
             }
         };
     }

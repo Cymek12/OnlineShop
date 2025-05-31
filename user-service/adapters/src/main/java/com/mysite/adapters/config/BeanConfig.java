@@ -1,8 +1,8 @@
 package com.mysite.adapters.config;
 
-import com.mysite.core.port.out.CartPort;
-import com.mysite.core.port.out.ProductPort;
-import com.mysite.core.service.UserService;
+import com.mysite.core.port.out.CartOperations;
+import com.mysite.core.port.out.ProductOperations;
+import com.mysite.core.service.UserServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 public class BeanConfig {
 
     @Bean
-    public UserService userService(ProductPort productPort, CartPort cartPort) {
-        return new UserService(productPort, cartPort);
+    public UserServiceImpl userService(ProductOperations productPort, CartOperations cartPort) {
+        return new UserServiceImpl(productPort, cartPort);
     }
 }

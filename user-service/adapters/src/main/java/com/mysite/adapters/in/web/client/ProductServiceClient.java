@@ -2,9 +2,9 @@ package com.mysite.adapters.in.web.client;
 
 import com.mysite.adapters.config.FeignConfig;
 import com.mysite.adapters.config.ProductFallbackFactory;
-import com.mysite.core.port.out.ProductPort;
+import com.mysite.core.port.out.ProductOperations;
 import com.mysite.model.PageContent;
-import com.mysite.model.ProductDTO;
+import com.mysite.modelpublic.dto.ProductDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
         configuration = FeignConfig.class,
         fallbackFactory = ProductFallbackFactory.class
 )
-public interface ProductServiceClient extends ProductPort {
+public interface ProductServiceClient extends ProductOperations {
     @GetMapping("/products/{id}")
     ProductDTO getProduct(@PathVariable("id") String id);
 

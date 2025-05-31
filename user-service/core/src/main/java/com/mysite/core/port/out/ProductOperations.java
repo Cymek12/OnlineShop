@@ -1,10 +1,9 @@
 package com.mysite.core.port.out;
 
-import com.mysite.model.MyPageable;
 import com.mysite.model.PageContent;
-import com.mysite.model.ProductDTO;
+import com.mysite.modelpublic.dto.ProductDTO;
 
-public interface ProductPort {
+public interface ProductOperations {
     ProductDTO getProduct(String id);
 
     PageContent<ProductDTO> getAllProducts(int size, int page, String productType);

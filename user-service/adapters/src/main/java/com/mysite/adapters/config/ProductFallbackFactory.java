@@ -2,13 +2,10 @@ package com.mysite.adapters.config;
 
 import com.mysite.adapters.in.web.client.ProductServiceClient;
 import com.mysite.core.exception.FallbackException;
-import com.mysite.core.exception.ProductNotFoundException;
 import com.mysite.model.PageContent;
-import com.mysite.model.ProductDTO;
-import feign.FeignException;
+import com.mysite.modelpublic.dto.ProductDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.openfeign.FallbackFactory;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 @Component
